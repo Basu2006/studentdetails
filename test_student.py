@@ -1,95 +1,32 @@
-# test_student.py
-# Pytest test cases for Student Grade Calculator
+import unittest
+from student import calculate_grade
 
-from student import calculate_average, assign_grade
+class TestStudentGrade(unittest.TestCase):
 
-# ---------------- GRADE S TEST CASES ----------------
+    def test_grade_s(self):
+        self.assertEqual(calculate_grade(95), "S")
 
-def test_grade_S_lower_boundary():
-    avg = calculate_average(90, 90, 90)
-    assert assign_grade(avg) == "S"
+    def test_grade_a(self):
+        self.assertEqual(calculate_grade(85), "A")
 
+    def test_grade_b(self):
+        self.assertEqual(calculate_grade(70), "B")
 
-def test_grade_S_middle_value():
-    avg = calculate_average(95, 95, 95)
-    assert assign_grade(avg) == "S"
+    def test_grade_c(self):
+        self.assertEqual(calculate_grade(55), "C")
 
+    def test_grade_d(self):
+        self.assertEqual(calculate_grade(45), "D")
 
-def test_grade_S_upper_boundary():
-    avg = calculate_average(100, 100, 100)
-    assert assign_grade(avg) == "S"
+    def test_grade_f(self):
+        self.assertEqual(calculate_grade(30), "F")
 
+    def test_boundary_values(self):
+        self.assertEqual(calculate_grade(90), "S")
+        self.assertEqual(calculate_grade(80), "A")
+        self.assertEqual(calculate_grade(65), "B")
+        self.assertEqual(calculate_grade(50), "C")
+        self.assertEqual(calculate_grade(40), "D")
 
-# ---------------- GRADE A TEST CASES ----------------
-
-def test_grade_A_lower_boundary():
-    avg = calculate_average(80, 80, 80)
-    assert assign_grade(avg) == "A"
-
-
-def test_grade_A_middle_value():
-    avg = calculate_average(85, 85, 85)
-    assert assign_grade(avg) == "A"
-
-
-def test_grade_A_upper_boundary():
-    avg = calculate_average(89.99, 89.99, 89.99)
-    assert assign_grade(avg) == "A"
-
-
-# ---------------- GRADE B TEST CASES ----------------
-
-def test_grade_B_lower_boundary():
-    avg = calculate_average(65, 65, 65)
-    assert assign_grade(avg) == "B"
-
-
-def test_grade_B_middle_value():
-    avg = calculate_average(70, 70, 70)
-    assert assign_grade(avg) == "B"
-
-
-def test_grade_B_upper_boundary():
-    avg = calculate_average(79.99, 79.99, 79.99)
-    assert assign_grade(avg) == "B"
-
-
-# ---------------- GRADE C TEST CASES ----------------
-
-def test_grade_C_lower_boundary():
-    avg = calculate_average(50, 50, 50)
-    assert assign_grade(avg) == "C"
-
-
-def test_grade_C_middle_value():
-    avg = calculate_average(55, 55, 55)
-    assert assign_grade(avg) == "C"
-
-
-def test_grade_C_upper_boundary():
-    avg = calculate_average(64.99, 64.99, 64.99)
-    assert assign_grade(avg) == "C"
-
-
-# ---------------- GRADE D TEST CASES ----------------
-
-def test_grade_D_lower_boundary():
-    avg = calculate_average(40, 40, 40)
-    assert assign_grade(avg) == "D"
-
-
-def test_grade_D_middle_value():
-    avg = calculate_average(45, 45, 45)
-    assert assign_grade(avg) == "D"
-
-
-def test_grade_D_upper_boundary():
-    avg = calculate_average(49.99, 49.99, 49.99)
-    assert assign_grade(avg) == "D"
-
-
-# ---------------- GRADE F TEST CASES ----------------
-
-def test_grade_F_below_40():
-    avg = calculate_average(30, 35, 39)
-    assert assign_grade(avg) == "F"
+if __name__ == "__main__":
+    unittest.main()
