@@ -1,5 +1,5 @@
 # student.py
-# Program to calculate student grade
+# Program to calculate student grade (Jenkins safe)
 
 import sys
 
@@ -25,24 +25,18 @@ def assign_grade(avg):
 def main():
     print("=== Student Grade Calculator ===")
 
-    try:
-        # Command-line input
-        if len(sys.argv) == 7:
-            name = sys.argv[1]
-            department = sys.argv[2]
-            semester = int(sys.argv[3])
-            m1 = float(sys.argv[4])
-            m2 = float(sys.argv[5])
-            m3 = float(sys.argv[6])
+    # Jenkins / CI requires fixed arguments
+    if len(sys.argv) != 7:
+        print("Usage: python student.py <name> <department> <semester> <m1> <m2> <m3>")
+        sys.exit(1)
 
-        # User input
-        else:
-            name = input("Enter Student Name: ")
-            department = input("Enter Department: ")
-            semester = int(input("Enter Semester: "))
-            m1 = float(input("Enter marks in Subject 1: "))
-            m2 = float(input("Enter marks in Subject 2: "))
-            m3 = float(input("Enter marks in Subject 3: "))
+    try:
+        name = sys.argv[1]
+        department = sys.argv[2]
+        semester = int(sys.argv[3])
+        m1 = float(sys.argv[4])
+        m2 = float(sys.argv[5])
+        m3 = float(sys.argv[6])
 
         print("\n--- Student Details ---")
         print("Student Name :", name)
@@ -58,6 +52,7 @@ def main():
 
     except ValueError:
         print("Invalid input. Please enter valid numeric values.")
+        sys.exit(1)
 
 
 if __name__ == "__main__":
